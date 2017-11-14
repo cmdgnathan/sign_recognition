@@ -23,8 +23,8 @@ class crop:
 
   def __init__(self):
 
-    self.image_sub = rospy.Subscriber("/usb_cam/image_raw/compressed", CompressedImage, self.img_cb)
-    #self.image_sub = rospy.Subscriber("/raspicam_node/image/compressed", CompressedImage, self.img_cb)    
+    #self.image_sub = rospy.Subscriber("/usb_cam/image_raw/compressed", CompressedImage, self.img_cb)
+    self.image_sub = rospy.Subscriber("/raspicam_node/image/compressed", CompressedImage, self.img_cb)    
 
     self.bridge = CvBridge()
 
@@ -167,7 +167,7 @@ class crop:
       min_size = int(0.1*max(background.shape))
       max_size = int(0.8*max(background.shape))
       #size = np.random.randint(min_size,max_size)
-      size = int(np.random.normal(0.5, 0.1, 1)*max(background.shape))
+      size = int(np.random.normal(0.4, 0.15, 1)*max(background.shape))
       size = min( max_size, max( min_size, size ) )
 
 
@@ -302,7 +302,8 @@ class crop:
       print "-- Size:         "
       #print "-- Location:     "
       #print "-- Contrast:     "
-
+    if self.frame_number >= 10000:
+        rospy.signal_shutdown('frame limit reached')
 
     # plt.subplot(141),plt.imshow(pad),plt.title('Input')
     # plt.subplot(142),plt.imshow(per),plt.title('Perspective')
