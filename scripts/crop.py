@@ -91,7 +91,7 @@ class crop:
     # Read Image from ROS
     try:
       background = self.bridge.compressed_imgmsg_to_cv2(data, "bgr8")
-      background = cv2.resize(background, (2*background.shape[0],2*background.shape[1]))
+      background = cv2.resize(background, (background.shape[0], background.shape[1]))
     except CvBridgeError as e:
       print(e)
 
@@ -164,7 +164,7 @@ class crop:
       box = per[min_x:max_x,min_y:max_y]
 
       # Background Integration
-      min_size = int(0.1*max(background.shape))
+      min_size = int(0.2*max(background.shape))
       max_size = int(0.8*max(background.shape))
       #size = np.random.randint(min_size,max_size)
       size = int(np.random.normal(0.4, 0.15, 1)*max(background.shape))
