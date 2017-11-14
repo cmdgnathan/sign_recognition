@@ -1,0 +1,15 @@
+<launch>
+
+
+
+
+  <node name="getObjectRange" pkg="ball_follower" type="getObjectRange.py" output="screen">
+  </node>
+
+  <node name="goToGoal" pkg="ball_follower" type="goToGoal.py" output="screen">
+  </node>
+
+  <include file="$(find turtlebot3_bringup)/launch/turtlebot3_core.launch"/>
+  <include file="$(find turtlebot3_bringup)/launch/turtlebot3_lidar.launch"/>
+
+</launch>

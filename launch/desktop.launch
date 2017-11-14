@@ -1,0 +1,6 @@
+<launch>
+
+  <node name="obstacleDebug" pkg="ball_follower" type="obstacleDebug.py" output="screen">
+  </node>
+
+</launch>

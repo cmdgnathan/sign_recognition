@@ -1,0 +1,6 @@
+<launch>
+
+  <node name="select_color" pkg="ball_follower" type="select_color.py" output="screen">
+  </node>
+
+</launch>
