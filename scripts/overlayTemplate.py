@@ -15,7 +15,7 @@ def overlayTemplate(foreground, background):
     # generate random position
     x=np.random.randint(0, wb-1)
     #y=np.random.randint(0, hb-1)
-    y=np.clip(hb/2+hb/4*np.random.randn(), a_min=0, a_max=hb-1)
+    y=int(np.clip(hb/2+hb/4*np.random.randn(), a_min=0, a_max=hb-1))
     foreground_rand_pos = np.zeros_like(background_padded)
     foreground_rand_pos[y:y+hf,x:x+wf,:]=foreground
     xmin=x-pad_left
@@ -28,6 +28,10 @@ def overlayTemplate(foreground, background):
     if ymin<0:
         height=height+ymin
         ymin=0
+    if xmin+width > wb:
+        width = wb-xmin
+    if ymin+height > hb:
+        height = hb-ymin
     bbox = np.array([xmin, ymin, width, height])
     # generate image mask: 1->foreground, 0->background
     mask = np.any(foreground_rand_pos!=0, axis=2).astype(np.float)
