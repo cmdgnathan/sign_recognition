@@ -13,9 +13,10 @@ def overlayTemplate(foreground, background):
     pad_right = pad_left
     background_padded = cv2.copyMakeBorder(background, pad_top, pad_bottom, pad_left, pad_right, cv2.BORDER_CONSTANT, value=[0,0,0])
     # generate random position
-    x=np.random.randint(0, wb-1)
+    #x=np.random.randint(0, wb-1)
+    x=int(np.clip(wb/2+wb/3*np.random.randn(), a_min=0, a_max=wb-1))
     #y=np.random.randint(0, hb-1)
-    y=int(np.clip(hb/2+hb/4*np.random.randn(), a_min=0, a_max=hb-1))
+    y=int(np.clip(hb/2+hb/6*np.random.randn(), a_min=0, a_max=hb-1))
     foreground_rand_pos = np.zeros_like(background_padded)
     foreground_rand_pos[y:y+hf,x:x+wf,:]=foreground
     xmin=x-pad_left
@@ -34,10 +35,10 @@ def overlayTemplate(foreground, background):
         height = hb-ymin
     bbox = np.array([xmin, ymin, width, height])
     # generate image mask: 1->foreground, 0->background
-    mask = np.any(foreground_rand_pos!=0, axis=2).astype(np.float)
+    mask = np.any(foreground_rand_pos>=0.01, axis=2).astype(np.float)
     # blur image mask
     mask_blurred = cv2.GaussianBlur(mask, ksize=(0,0), sigmaX=6)
-    mask_blurred = (mask_blurred-0.5)/0.5
+    mask_blurred = (mask_blurred-0.6)/0.4
     mask_blurred = np.clip(mask_blurred, a_min=0, a_max=1.0)
     mask_blurred = np.expand_dims(mask_blurred, axis=2)
     # overlay image using alpha blending
