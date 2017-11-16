@@ -1,11 +1,14 @@
 # Guideline
 https://timebutt.github.io/static/how-to-train-yolov2-to-detect-custom-objects/
+
+# YOLO v2
 https://pjreddie.com/darknet/yolo/
 
+# ROS YOLO
+https://github.com/ayushgaud/darknet_ros
 
 # Train Objects
 ./darknet detector train cfg/obj.data cfg/yolo-obj.2.0.cfg darknet19_448.conv.23
-
 
 # Detect Objects
 ./darknet detector test cfg/obj.data cfg/yolo-obj.2.0.cfg yolo-obj_300.weights data/actual_signs/35.png
