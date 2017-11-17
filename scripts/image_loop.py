@@ -17,8 +17,8 @@ import glob, os
 class image_loop:
 
   def __init__(self):
-    #self.image_pub = rospy.Publisher("/usb_cam/image_raw",Image, queue_size=1)
-    self.image_pub = rospy.Publisher("/camera/rgb/image_raw",Image, queue_size=1)
+    self.image_pub = rospy.Publisher("/usb_cam/image_raw",Image, queue_size=1)
+    #self.image_pub = rospy.Publisher("/camera/rgb/image_raw",Image, queue_size=1)
 
 
     self.image_dir = os.path.abspath( os.path.join( os.path.expanduser('~'),'Projects/darknet/data/actual_signs' ) )
@@ -59,7 +59,7 @@ def main(args):
   rospy.init_node('image_loop', anonymous=True)
 
   try:
-    rate = rospy.Rate(1)
+    rate = rospy.Rate(0.5)
     while not rospy.is_shutdown():
       ic.publish()
       rate.sleep()
