@@ -44,6 +44,8 @@ class image_loop:
     # Read Image from File
     img = cv2.imread( file_path )
 
+    img = cv2.resize(img, (300,300), interpolation = cv2.INTER_CUBIC)
+
     print "Publishing", file_path
 
     try:

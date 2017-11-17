@@ -7,7 +7,7 @@ import glob, os
 current_dir = os.path.abspath( os.path.join( '.','object_frame') )
 
 # Directory where the data will reside, relative to 'darknet.exe'
-path_data = 'data/signs/'
+path_data = 'data/actual_signs/'
 
 # Percentage of images to be used for the test set
 percentage_test = 10;
