@@ -142,7 +142,7 @@ def classify(net, meta, im):
     res = sorted(res, key=lambda x: -x[1])
     return res
 
-def detect(net, meta, image, thresh=.5, hier_thresh=.5, nms=.45):
+def detect(net, meta, image, thresh=.1, hier_thresh=.5, nms=.45):
     im = load_image(image, 0, 0)
     boxes = make_boxes(net)
     probs = make_probs(net)
@@ -172,9 +172,14 @@ class yolo:
     # Directory Structure
     self.darknet_base = DARKNET_PATH
 
-    self.darknet_meta = self.darknet_base+'/cfg/obj.data' 
+    self.darknet_meta = self.darknet_base+'/cfg/signs.data' 
     self.darknet_cfg = self.darknet_base+'/cfg/yolo-sign-full.cfg'
-    self.darknet_weights = self.darknet_base+'/backup/yolo-sign-full_600.weights'
+    self.darknet_weights = self.darknet_base+'/signs.weights/yolo-sign-full_800.weights'
+
+    # self.darknet_meta = self.darknet_base+'/cfg/signs9.data' 
+    # self.darknet_cfg = self.darknet_base+'/cfg/yolo-sign-full.cfg'
+    # self.darknet_weights = self.darknet_base+'/signs9.weights/yolo-sign-full_400.weights'
+
 
     self.received = False
     self.loaded = False
@@ -260,7 +265,7 @@ def main(args):
   rospy.init_node('yolo', anonymous=True)
 
   try:
-    rate = rospy.Rate(0.5)
+    rate = rospy.Rate(2)
     while not rospy.is_shutdown():
 
       print ic.loaded
